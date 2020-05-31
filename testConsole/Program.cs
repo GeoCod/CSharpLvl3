@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Net;
+using System.Net.Mail;
 
 
 namespace testConsole
@@ -7,11 +8,17 @@ namespace testConsole
     {
         static void Main(string[] args)
         {
-            MailMessage mm = new MailMessage("оправитель@yandex.ru", "получатель@yandex.ru");
-            mm.Subject = "Заголовок письма";
-            mm.Body = "Содержимое письма";
+            MailMessage msg = new MailMessage("оправитель@yandex.ru", "получатель@yandex.ru");
+            msg.Subject = "Заголовок письма";
+            msg.Body = "Содержимое письма";
+            msg.IsBodyHtml = false; //не используем html в теле письма
+            msg.Attachments.Add(new Attachment("c:\\file.txt"));
 
-            mm.IsBodyHtml = false; //не используем html в теле письма
+            SmtpClient client = new SmtpClient("smtp.yandex.ru", 25);
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("UserName", "UserPassword");
+
+            client.Send(msg);
         }
     }
 }
