@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Net.Mail;
+
 
 namespace testConsole
 {
@@ -6,7 +7,11 @@ namespace testConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            MailMessage mm = new MailMessage("оправитель@yandex.ru", "получатель@yandex.ru");
+            mm.Subject = "Заголовок письма";
+            mm.Body = "Содержимое письма";
+
+            mm.IsBodyHtml = false; //не используем html в теле письма
         }
     }
 }
