@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace testWPF
+namespace CSharpLvl3
 {
     public partial class MainWindow : Window
     {
