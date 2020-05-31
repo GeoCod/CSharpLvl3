@@ -8,5 +8,10 @@ namespace testWPF
         {
             InitializeComponent();
         }
+
+        private void OnSendButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

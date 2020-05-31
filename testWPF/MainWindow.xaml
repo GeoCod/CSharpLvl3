@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:testWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Тестовый клиент WPF" Height="150" Width="330" ResizeMode="NoResize">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" MinWidth="150"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Имя пользователя" Height="25" Margin="5" TextAlignment="Left"/>
+            <TextBlock Text="Пароль" Height="25" Margin="5,0" TextAlignment="Left" />
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBox x:Name ="UserNameEdit" Height="25" Margin="0,5,0,5"/>
+            <PasswordBox Name="PasswordEdit" Height="25" Margin="0,0,0,5" Password="Password"/>
+        </StackPanel>
+        <Button Content="Отправить" Grid.Column="0" Grid.ColumnSpan="2" Height="35" Click="OnSendButtonClick" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
