@@ -4,27 +4,50 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpLvl3"
+        xmlns:vm="clr-namespace:CSharpLvl3.ViewModels"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
+    <Window.DataContext>
+        <vm:WpfMailSenderViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid Height="35" VerticalAlignment="Top" Background="#FF9C27B0">
             <TextBlock Text="Рассылщик почты" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
                        FontSize="20" FontFamily="Champagne &amp; Limousines" />
-            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
-                <materialDesign:PackIcon Kind="Power" Cursor="Hand" Height="20" Width="20" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding CloseApplicationCommnd}">
+                <materialDesign:PackIcon Kind="Power" Cursor="Hand" Height="20" Width="20"/>
             </Button>
         </Grid>
         <Grid Margin="0 30 0 0">
-            <!--добавлен дизайн TabControl от Abel13
-            github.com/Abel13/TabMenu2-->
             <dragablz:TabablzControl>
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController/>
                 </dragablz:TabablzControl.InterTabController>
-                <TabItem Header="Группа рассылки">
-                    
+                <TabItem Header="Рассылка" ToolTip="Управление рассылкой">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*" MinWidth="150"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="0" Grid.Row="0">
+                            <TextBlock Text="Имя пользователя" Height="25" Margin="5,5,5,0" FontWeight="Bold" 
+                                       FontStyle="Italic" Foreground="#FF4D0909"/>
+                            <TextBlock Text="Пароль" Height="25" Margin="5,0" TextAlignment="Left" Foreground="#FF4D0909" 
+                                       FontWeight="Bold" FontStyle="Italic"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0">
+                            <TextBox x:Name ="UserNameEdit" Height="25"/>
+                            <PasswordBox x:Name="PasswordEdit" Height="25" Password="Password"/>
+                        </StackPanel>
+                        <Button Content="Отправить" Grid.Column="0" Grid.Row="1" Click="OnSendButtonClick" Grid.ColumnSpan="2" 
+                                Height="35" VerticalAlignment="Bottom"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Планировщик">
                     
