@@ -6,9 +6,9 @@ using System.Security;
 
 namespace testWPF
 {
-    public partial class MainWindow : Window
+    public partial class WpfTestMailSender : Window
     {
-        public MainWindow()
+        public WpfTestMailSender()
         {
             InitializeComponent();
         }

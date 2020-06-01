@@ -7,33 +7,33 @@
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
     <Grid>
-        <Grid Height="40" VerticalAlignment="Top" Background="#FF9C27B0">
+        <Grid Height="35" VerticalAlignment="Top" Background="#FF9C27B0">
             <TextBlock Text="Рассылщик почты" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                       FontSize="22" FontFamily="Champagne &amp; Limousines" />
+                       FontSize="20" FontFamily="Champagne &amp; Limousines" />
             <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
-                <materialDesign:PackIcon Kind="Power"/>
+                <materialDesign:PackIcon Kind="Power" Cursor="Hand" Height="20" Width="20" />
             </Button>
         </Grid>
-        <Grid Margin="0 40 0 0">
+        <Grid Margin="0 30 0 0">
             <!--добавлен дизайн TabControl от Abel13
             github.com/Abel13/TabMenu2-->
             <dragablz:TabablzControl>
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController/>
                 </dragablz:TabablzControl.InterTabController>
-                <TabItem Header="Главная">
-                    <TextBlock Text="Hello World!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </TabItem>
                 <TabItem Header="Группа рассылки">
-                    <TextBlock Text="Amazing designs!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    
+                </TabItem>
+                <TabItem Header="Планировщик">
+                    
                 </TabItem>
                 <TabItem Header="Редактор писем">
-                    <TextBlock Text="Ask for any question!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    
                 </TabItem>
                 <TabItem Header="Статистика">
-                    
+
                 </TabItem>
             </dragablz:TabablzControl>
         </Grid>
