@@ -40,7 +40,10 @@ namespace testWPF
                         client.Credentials = new NetworkCredential(user_name, user_password);
                         client.Send(message);
 
-                        MessageBox.Show("Почта отправлена!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        SendEndWindow sew = new SendEndWindow();
+                        sew.ShowDialog();
+                        //MessageBox.Show("Почта отправлена!", "Успешно!", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
