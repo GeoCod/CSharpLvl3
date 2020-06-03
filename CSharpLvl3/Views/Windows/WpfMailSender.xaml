@@ -9,15 +9,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
-        Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
+        Height="600" Width="1080" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
     <Window.DataContext>
         <vm:WpfMailSenderViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid Height="35" VerticalAlignment="Top" Background="#FF9C27B0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid Height="30" VerticalAlignment="Top" Background="#FF9C27B0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <TextBlock Text="Рассылщик почты" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
                        FontSize="20" FontFamily="Champagne &amp; Limousines" />
-            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding CloseApplicationCommnd}">
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" 
+                    Command="{Binding CloseApplicationCommnd}">
                 <materialDesign:PackIcon Kind="Power" Cursor="Hand" Height="20" Width="20"/>
             </Button>
         </Grid>
@@ -34,26 +36,75 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="*" MinWidth="150"/>
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="80"/>
-                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Column="0" Grid.Row="0">
-                            <TextBlock Text="Имя пользователя" Height="25" Margin="5,5,5,0" FontWeight="Bold" 
-                                       FontStyle="Italic" Foreground="#FF4D0909"/>
-                            <TextBlock Text="Пароль" Height="25" Margin="5,0" TextAlignment="Left" Foreground="#FF4D0909" 
-                                       FontWeight="Bold" FontStyle="Italic"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Grid.Row="0">
-                            <TextBox x:Name ="UserNameEdit" Height="25"/>
-                            <PasswordBox x:Name="PasswordEdit" Height="25" Password="Password"/>
-                        </StackPanel>
-                        <Button Content="Отправить" Grid.Column="0" Grid.Row="1" Click="OnSendButtonClick" Grid.ColumnSpan="2" 
-                                Height="35" VerticalAlignment="Bottom"/>
+                        <ToolBarTray>
+                            <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
+                                <ComboBox Width="150" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя"/>
+                                <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_UserPlus" Height="18" Foreground="Green"/>
+                                </Button>
+                                <Button x:Name="btnEditSender" ToolTip="Редактировать" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_UserEdit" Height="18" Foreground="Black"/>
+                                </Button>
+                                <Button x:Name="btnDeleteSender" ToolTip="Удалить" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_UserMinus" Height="18" Foreground="Red"/>
+                                </Button>
+                            </ToolBar>
+                            <ToolBar x:Name="tbSmtp" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
+                                <ComboBox Width="150" Name="cbSmtpSelect"/>
+                                <Button x:Name="btnAddSmtp" ToolTip="Добавить почтовый сервер" Margin="0 0 3 0" 
+                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Regular_CalendarPlus" Height="18" Foreground="Green"/>
+                                </Button>
+                                <Button x:Name="btnEditSmtp" ToolTip="Редактировать сервер" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Regular_Edit" Height="18" Foreground="Black"/>
+                                </Button>
+                                <Button x:Name="btnDeleteSmtp" ToolTip="Удалить сервер" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Regular_CalendarMinus" Height="18" Foreground="Red"/>
+                                </Button>
+                            </ToolBar>
+                            <ToolBar Name="tbPlanner">
+                                <Button x:Name="btnClock" ToolTip="Перейти в раздел планирования рассылок" 
+                                        Width="300" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Перейти в планировщик" VerticalAlignment="Center" Margin="0 0 7 0"/>
+                                        <fa:SvgAwesome Icon="Regular_Clock" Height="18" Foreground="Coral"/>
+                                    </StackPanel>
+                                </Button>
+                            </ToolBar>
+                            <ToolBar Name="tbAddressee" Band="1" BandIndex="1" Header="Список адресатов" FontWeight="Bold" 
+                                     Foreground="#FF9C27B0" FontSize="12">
+                                <Button x:Name="btnAddAddressee" ToolTip="Добавить адрес в список рассылки" Margin="0 0 3 0" 
+                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_Plus" Height="18" Foreground="Green"/>
+                                </Button>
+                                <Button x:Name="btnEditAddressee" ToolTip="Редактировать выбранный адрес" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_Edit" Height="18" Foreground="Blue"/>
+                                </Button>
+                                <Button x:Name="btnDeleteAddressee" ToolTip="Удалить адрес из рассылки" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_Minus" Height="18" Foreground="Red"/>
+                                </Button>
+                            </ToolBar>
+                        </ToolBarTray>
+                        <GroupBox Grid.Row="1" Header="Получатели писем">
+                            <DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
+                                    <DataGridTextColumn Header="Имя" Width="Auto" MinWidth="250"/>
+                                    <DataGridTextColumn Header="Адрес" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
                     </Grid>
                 </TabItem>
                 <TabItem ToolTip="Планирование рассылки писем">
@@ -63,7 +114,7 @@
                             <TextBlock Text="Планировщик" Foreground="White"/>
                         </StackPanel>
                     </TabItem.Header>
-                    
+
                 </TabItem>
                 <TabItem ToolTip="Редактировние писем">
                     <TabItem.Header>
@@ -77,11 +128,11 @@
                 <TabItem ToolTip="Сводная информация по отправленным письмам">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="18" Margin="0 0 5 0" Foreground="White"/>
                             <TextBlock Text="Статистика" Foreground="White"/>
                         </StackPanel>
                     </TabItem.Header>
-                    
+
                 </TabItem>
             </dragablz:TabablzControl>
         </Grid>
