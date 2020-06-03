@@ -7,13 +7,14 @@
         xmlns:vm="clr-namespace:CSharpLvl3.ViewModels"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
     <Window.DataContext>
         <vm:WpfMailSenderViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid Height="35" VerticalAlignment="Top" Background="#FF9C27B0">
+        <Grid Height="35" VerticalAlignment="Top" Background="#FF9C27B0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <TextBlock Text="Рассылщик почты" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
                        FontSize="20" FontFamily="Champagne &amp; Limousines" />
             <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding CloseApplicationCommnd}">
@@ -25,7 +26,13 @@
                 <dragablz:TabablzControl.InterTabController>
                     <dragablz:InterTabController/>
                 </dragablz:TabablzControl.InterTabController>
-                <TabItem Header="Рассылка" ToolTip="Управление рассылкой">
+                <TabItem ToolTip="Управление рассылкой писем">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Solid_MailBulk" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Рассылка" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>
@@ -49,14 +56,32 @@
                                 Height="35" VerticalAlignment="Bottom"/>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Планировщик">
+                <TabItem ToolTip="Планирование рассылки писем">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Regular_CalendarAlt" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Планировщик" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
                     
                 </TabItem>
-                <TabItem Header="Редактор писем">
-                    
-                </TabItem>
-                <TabItem Header="Статистика">
+                <TabItem ToolTip="Редактировние писем">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Regular_Edit" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Редактор писем" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
 
+                </TabItem>
+                <TabItem ToolTip="Сводная информация по отправленным письмам">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Статистика" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    
                 </TabItem>
             </dragablz:TabablzControl>
         </Grid>
