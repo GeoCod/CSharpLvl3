@@ -9,7 +9,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
-        Height="600" Width="1080" ResizeMode="NoResize"
+        Height="620" Width="1080" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
     <Window.DataContext>
         <vm:WpfMailSenderViewModel/>
@@ -114,7 +114,73 @@
                             <TextBlock Text="Планировщик" Foreground="White"/>
                         </StackPanel>
                     </TabItem.Header>
-
+                    <DockPanel>
+                        <GroupBox Header="Управление">
+                            <StackPanel>
+                                <Calendar x:Name="cldSchedulDateTimes" SelectionMode="MultipleRange"/>
+                                <materialDesign:TimePicker Name="tbTimePicker" BorderBrush="Gray" Text="Выбирите время отправки" 
+                                                           FontSize="14" FontWeight="DemiBold" Foreground="DarkViolet" Margin="0 5"/>
+                                <StackPanel Margin="5">
+                                    <Button x:Name="btnSendAtOnce" HorizontalContentAlignment="Stretch" Margin="0 2">
+                                        <DockPanel Margin="40 0">
+                                            <fa:SvgAwesome DockPanel.Dock="Right" Icon="Regular_Clock" Foreground="DarkKhaki"/>
+                                            <TextBlock Text="Запланировать" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </DockPanel>
+                                    </Button>
+                                    <Button x:Name="btnSend" HorizontalContentAlignment="Stretch">
+                                        <DockPanel Margin="40 0">
+                                            <fa:SvgAwesome DockPanel.Dock="Right" Icon="Regular_PaperPlane" Foreground="DarkKhaki"/>
+                                            <TextBlock Text="Отправить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </DockPanel>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Задания">
+                            <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" materialDesign:ScrollViewerAssist.CornerRectangleVisibility="Visible">
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 1">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 2">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 3">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 4">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                            </ListBox>
+                        </GroupBox>
+                    </DockPanel>
                 </TabItem>
                 <TabItem ToolTip="Редактировние писем">
                     <TabItem.Header>
