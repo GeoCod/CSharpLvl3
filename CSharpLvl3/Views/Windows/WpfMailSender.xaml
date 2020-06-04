@@ -1,0 +1,206 @@
+﻿<Window x:Class="CSharpLvl3.WpfMailSender"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSharpLvl3"
+        xmlns:vm="clr-namespace:CSharpLvl3.ViewModels"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        mc:Ignorable="d"
+        Height="620" Width="1080" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
+    <Window.DataContext>
+        <vm:WpfMailSenderViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid Height="30" VerticalAlignment="Top" Background="#FF9C27B0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <TextBlock Text="Рассылщик почты" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       FontSize="20" FontFamily="Champagne &amp; Limousines" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" 
+                    Command="{Binding CloseApplicationCommnd}">
+                <materialDesign:PackIcon Kind="Power" Cursor="Hand" Height="20" Width="20"/>
+            </Button>
+        </Grid>
+        <Grid Margin="0 30 0 0">
+            <dragablz:TabablzControl>
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController/>
+                </dragablz:TabablzControl.InterTabController>
+                <TabItem ToolTip="Управление рассылкой писем">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Solid_MailBulk" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Рассылка" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ToolBarTray>
+                            <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
+                                <ComboBox Width="150" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя"/>
+                                <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_UserPlus" Height="18" Foreground="Green"/>
+                                </Button>
+                                <Button x:Name="btnEditSender" ToolTip="Редактировать" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_UserEdit" Height="18" Foreground="Black"/>
+                                </Button>
+                                <Button x:Name="btnDeleteSender" ToolTip="Удалить" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_UserMinus" Height="18" Foreground="Red"/>
+                                </Button>
+                            </ToolBar>
+                            <ToolBar x:Name="tbSmtp" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
+                                <ComboBox Width="150" Name="cbSmtpSelect"/>
+                                <Button x:Name="btnAddSmtp" ToolTip="Добавить почтовый сервер" Margin="0 0 3 0" 
+                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Regular_CalendarPlus" Height="18" Foreground="Green"/>
+                                </Button>
+                                <Button x:Name="btnEditSmtp" ToolTip="Редактировать сервер" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Regular_Edit" Height="18" Foreground="Black"/>
+                                </Button>
+                                <Button x:Name="btnDeleteSmtp" ToolTip="Удалить сервер" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Regular_CalendarMinus" Height="18" Foreground="Red"/>
+                                </Button>
+                            </ToolBar>
+                            <ToolBar Name="tbPlanner">
+                                <Button x:Name="btnClock" ToolTip="Перейти в раздел планирования рассылок" 
+                                        Width="300" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Перейти в планировщик" VerticalAlignment="Center" Margin="0 0 7 0"/>
+                                        <fa:SvgAwesome Icon="Regular_Clock" Height="18" Foreground="Coral"/>
+                                    </StackPanel>
+                                </Button>
+                            </ToolBar>
+                            <ToolBar Name="tbAddressee" Band="1" BandIndex="1" Header="Список адресатов" FontWeight="Bold" 
+                                     Foreground="#FF9C27B0" FontSize="12">
+                                <Button x:Name="btnAddAddressee" ToolTip="Добавить адрес в список рассылки" Margin="0 0 3 0" 
+                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_Plus" Height="18" Foreground="Green"/>
+                                </Button>
+                                <Button x:Name="btnEditAddressee" ToolTip="Редактировать выбранный адрес" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_Edit" Height="18" Foreground="Blue"/>
+                                </Button>
+                                <Button x:Name="btnDeleteAddressee" ToolTip="Удалить адрес из рассылки" Margin="0 0 3 0" 
+                                        Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
+                                    <fa:SvgAwesome Icon="Solid_Minus" Height="18" Foreground="Red"/>
+                                </Button>
+                            </ToolBar>
+                        </ToolBarTray>
+                        <GroupBox Grid.Row="1" Header="Получатели писем">
+                            <DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
+                                    <DataGridTextColumn Header="Имя" Width="Auto" MinWidth="250"/>
+                                    <DataGridTextColumn Header="Адрес" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </GroupBox>
+                    </Grid>
+                </TabItem>
+                <TabItem ToolTip="Планирование рассылки писем">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Regular_CalendarAlt" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Планировщик" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <DockPanel>
+                        <GroupBox Header="Управление">
+                            <StackPanel>
+                                <Calendar x:Name="cldSchedulDateTimes" SelectionMode="MultipleRange"/>
+                                <materialDesign:TimePicker Name="tbTimePicker" BorderBrush="Gray" Text="Выбирите время отправки" 
+                                                           FontSize="14" FontWeight="DemiBold" Foreground="DarkViolet" Margin="0 5"/>
+                                <StackPanel Margin="5">
+                                    <Button x:Name="btnSendAtOnce" HorizontalContentAlignment="Stretch" Margin="0 2">
+                                        <DockPanel Margin="40 0">
+                                            <fa:SvgAwesome DockPanel.Dock="Right" Icon="Regular_Clock" Foreground="DarkKhaki"/>
+                                            <TextBlock Text="Запланировать" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </DockPanel>
+                                    </Button>
+                                    <Button x:Name="btnSend" HorizontalContentAlignment="Stretch">
+                                        <DockPanel Margin="40 0">
+                                            <fa:SvgAwesome DockPanel.Dock="Right" Icon="Regular_PaperPlane" Foreground="DarkKhaki"/>
+                                            <TextBlock Text="Отправить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </DockPanel>
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Задания">
+                            <ListBox ScrollViewer.VerticalScrollBarVisibility="Visible" materialDesign:ScrollViewerAssist.CornerRectangleVisibility="Visible">
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 1">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 2">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 3">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                                <ListBoxItem HorizontalContentAlignment="Stretch">
+                                    <GroupBox Header="Задание 4">
+                                        <StackPanel>
+                                            <TextBlock Text="Время"/>
+                                            <TextBlock Text="Сервер"/>
+                                            <TextBlock Text="Отправитель"/>
+                                            <TextBlock Text="Список получателей"/>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </ListBoxItem>
+                            </ListBox>
+                        </GroupBox>
+                    </DockPanel>
+                </TabItem>
+                <TabItem ToolTip="Редактировние писем">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Regular_Edit" Height="15" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Редактор писем" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                </TabItem>
+                <TabItem ToolTip="Сводная информация по отправленным письмам">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="18" Margin="0 0 5 0" Foreground="White"/>
+                            <TextBlock Text="Статистика" Foreground="White"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                </TabItem>
+            </dragablz:TabablzControl>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="testWPF.WpfTestMailSender"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:testWPF"
+        mc:Ignorable="d"
+        Title="Тестовый клиент WPF" Height="150" Width="330" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" MinWidth="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="Имя пользователя" Height="25" Margin="5,5,5,0" FontWeight="Bold" FontStyle="Italic" Foreground="#FF4D0909"/>
+            <TextBlock Text="Пароль" Height="25" Margin="5,0" TextAlignment="Left" Foreground="#FF4D0909" FontWeight="Bold" FontStyle="Italic"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <TextBox x:Name ="UserNameEdit" Height="25"/>
+            <PasswordBox x:Name="PasswordEdit" Height="25" Password="Password"/>
+        </StackPanel>
+        <Button Content="Отправить" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="35" Click="OnSendButtonClick" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>
