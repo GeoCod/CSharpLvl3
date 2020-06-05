@@ -189,7 +189,14 @@
                             <TextBlock Text="Редактор писем" Foreground="White"/>
                         </StackPanel>
                     </TabItem.Header>
-
+                    <DockPanel>
+                        <GroupBox Header="Заголовок письма" DockPanel.Dock="Top">
+                            <TextBox Text="Текст заголовка письма"/>
+                        </GroupBox>
+                        <GroupBox Header="Тест письма">
+                            <TextBox Text="Текст тела письма" TextWrapping="Wrap"/>
+                        </GroupBox>
+                    </DockPanel>
                 </TabItem>
                 <TabItem ToolTip="Сводная информация по отправленным письмам">
                     <TabItem.Header>
