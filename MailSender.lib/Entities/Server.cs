@@ -13,7 +13,7 @@
         public int Port { get; set; }
 
         /// <summary>Использование SSL соединения</summary>
-        public bool UseSSL { get; set; }
+        public bool UseSSL { get; set; } = true;
 
         /// <summary>Логин отправителя</summary>
         public string Login { get; set; }
