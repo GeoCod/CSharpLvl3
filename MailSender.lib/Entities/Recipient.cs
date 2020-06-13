@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace MailSender.lib.Entities
 {
+    /// <summary>Получатель письма</summary>
     public class Recipient
     {
         /// <summary>Имя отправителя</summary>

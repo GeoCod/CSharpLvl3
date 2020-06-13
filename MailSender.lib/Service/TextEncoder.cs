@@ -4,12 +4,19 @@ namespace MailSender.lib.Service
 {
     public static class TextEncoder
     {
+        /// <summary>Кодирование текста</summary>
+        /// <param name="Source">Исходная строка</param>
+        /// <param name="Key">Ключ кодирования</param>
+        /// <returns>Возвращает закодированную строку</returns>
         public static string Encode(this string Source, int Key = 1)
         {
             return new string(Source.Select(c => (char)(c + Key)).ToArray());
         }
 
-
+        /// <summary>Декодирование текста</summary>
+        /// <param name="Source">Закодированная строка</param>
+        /// <param name="Key">Ключ декодирования</param>
+        /// <returns>Возвращает раскодированную строку</returns>
         public static string Decode(this string Source, int Key = 1)
         {
             return new string(Source.Select(c => (char)(c - Key)).ToArray());
