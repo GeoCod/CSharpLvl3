@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpLvl3"
         xmlns:vm="clr-namespace:CSharpLvl3.ViewModels"
-        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
@@ -24,15 +23,12 @@
             </Button>
         </Grid>
         <Grid Margin="0 30 0 0">
-            <dragablz:TabablzControl>
-                <dragablz:TabablzControl.InterTabController>
-                    <dragablz:InterTabController/>
-                </dragablz:TabablzControl.InterTabController>
-                <TabItem ToolTip="Управление рассылкой писем">
+            <TabControl>
+                <TabItem ToolTip="Управление рассылкой писем" Background="White" BorderBrush="AliceBlue">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Solid_MailBulk" Height="15" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Рассылка" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Solid_MailBulk" Height="15" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Рассылка" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
@@ -42,7 +38,8 @@
                         </Grid.RowDefinitions>
                         <ToolBarTray>
                             <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
-                                <ComboBox Width="150" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя"/>
+                                <ComboBox Width="200" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя" Margin="5 3 10 3"
+                                          Style="{DynamicResource MaterialDesignComboBox}"/>
                                 <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Solid_UserPlus" Height="18" Foreground="Green"/>
@@ -57,7 +54,7 @@
                                 </Button>
                             </ToolBar>
                             <ToolBar x:Name="tbSmtp" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
-                                <ComboBox Width="150" Name="cbSmtpSelect"/>
+                                <ComboBox Width="200" Name="cbSmtpSelect" Style="{DynamicResource MaterialDesignComboBox}" Margin="5 3 10 3"/>
                                 <Button x:Name="btnAddSmtp" ToolTip="Добавить почтовый сервер" Margin="0 0 3 0" 
                                          Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Regular_CalendarPlus" Height="18" Foreground="Green"/>
@@ -97,7 +94,7 @@
                             </ToolBar>
                         </ToolBarTray>
                         <GroupBox Grid.Row="1" Header="Получатели писем">
-                            <DataGrid>
+                            <DataGrid Style="{DynamicResource MaterialDesignDataGrid}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
                                     <DataGridTextColumn Header="Имя" Width="Auto" MinWidth="250"/>
@@ -107,11 +104,11 @@
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem ToolTip="Планирование рассылки писем">
+                <TabItem ToolTip="Планирование рассылки писем" Background="White" BorderBrush="AliceBlue">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Regular_CalendarAlt" Height="15" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Планировщик" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Regular_CalendarAlt" Height="15" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Планировщик" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
                     <DockPanel>
@@ -182,11 +179,11 @@
                         </GroupBox>
                     </DockPanel>
                 </TabItem>
-                <TabItem ToolTip="Редактировние писем">
+                <TabItem ToolTip="Редактировние писем" Background="White" BorderBrush="AliceBlue">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Regular_Edit" Height="15" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Редактор писем" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Regular_Edit" Height="15" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Редактор писем" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
                     <DockPanel>
@@ -198,16 +195,16 @@
                         </GroupBox>
                     </DockPanel>
                 </TabItem>
-                <TabItem ToolTip="Сводная информация по отправленным письмам">
+                <TabItem ToolTip="Сводная информация по отправленным письмам" Background="White" BorderBrush="AliceBlue" Visibility="Collapsed">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="18" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Статистика" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="18" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Статистика" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
 
                 </TabItem>
-            </dragablz:TabablzControl>
+            </TabControl>
         </Grid>
     </Grid>
 </Window>

@@ -8,8 +8,8 @@ namespace CSharpLvl3.Services
 {
     public class EmailSendServiceClass
     {
-        public EmailSendServiceClass()
-        {
+        //public EmailSendServiceClass()
+        //{
             //List<string> listStrMails = new List<string> { "testEmail@gmail.com", "email@yandex.ru" };
             //string strPassword = passwordBox.Password;
             //foreach (string mail in listStrMails)
@@ -37,6 +37,6 @@ namespace CSharpLvl3.Services
             //}
             //MessageBox.Show("Работа завершена.");
 
-        }
+        //}
     }
 }
