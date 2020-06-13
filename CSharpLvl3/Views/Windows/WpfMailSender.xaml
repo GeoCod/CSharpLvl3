@@ -40,7 +40,7 @@
                         </Grid.RowDefinitions>
                         <ToolBarTray>
                             <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
-                                <ComboBox Width="200" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя" Margin="5 3 10 3"
+                                <ComboBox Width="200" Name="SendersList" ToolTip="Выбрать email отправителя" Margin="5 3 10 3"
                                           Style="{DynamicResource MaterialDesignComboBox}" IsEditable="True"
                                           ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Adress"/>
                                 <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
@@ -57,7 +57,7 @@
                                 </Button>
                             </ToolBar>
                             <ToolBar x:Name="tbSmtp" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
-                                <ComboBox Width="200" Name="cbSmtpSelect" Style="{DynamicResource MaterialDesignComboBox}" Margin="5 3 10 3"
+                                <ComboBox Width="200" Name="ServersList" Style="{DynamicResource MaterialDesignComboBox}" Margin="5 3 10 3"
                                           ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate DataType="entities:Server">
@@ -112,11 +112,13 @@
                             </ToolBar>
                         </ToolBarTray>
                         <GroupBox Grid.Row="1" Header="Получатели писем">
-                            <DataGrid Style="{DynamicResource MaterialDesignDataGrid}">
+                            <DataGrid Style="{DynamicResource MaterialDesignDataGrid}" ItemsSource="{x:Static data:TestData.Recipients}"
+                                      AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="Gray" GridLinesVisibility="Vertical"
+                                      AlternatingRowBackground="Violet" Name="RecipientsList">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
-                                    <DataGridTextColumn Header="Имя" Width="Auto" MinWidth="250"/>
-                                    <DataGridTextColumn Header="Адрес" Width="*"/>
+                                    <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="Auto" MinWidth="250"/>
+                                    <DataGridTextColumn Header="Адрес" Binding="{Binding Adress}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </GroupBox>
@@ -142,7 +144,7 @@
                                             <TextBlock Text="Запланировать" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </DockPanel>
                                     </Button>
-                                    <Button x:Name="btnSend" HorizontalContentAlignment="Stretch">
+                                    <Button x:Name="btnSend" HorizontalContentAlignment="Stretch" Click="OnSendButtonClick">
                                         <DockPanel Margin="40 0">
                                             <fa:SvgAwesome DockPanel.Dock="Right" Icon="Regular_PaperPlane" Foreground="DarkKhaki"/>
                                             <TextBlock Text="Отправить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -204,14 +206,38 @@
                             <TextBlock Text="Редактор писем" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <DockPanel>
-                        <GroupBox Header="Заголовок письма" DockPanel.Dock="Top">
-                            <TextBox Text="Текст заголовка письма"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="150" MaxWidth="300" Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Header="Список писем">
+                            <DockPanel>
+                                <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+                                    <Button Content="Добавить"/>
+                                    <Button Content="Удалить"/>
+                                </UniformGrid>
+                                <ListBox>
+                                    <ListBoxItem>Письмо 1</ListBoxItem>
+                                    <ListBoxItem>Письмо 2</ListBoxItem>
+                                    <ListBoxItem>Письмо 3</ListBoxItem>
+                                    <ListBoxItem>Письмо 4</ListBoxItem>
+                                </ListBox>
+                            </DockPanel>
+
                         </GroupBox>
-                        <GroupBox Header="Тест письма">
-                            <TextBox Text="Текст тела письма" TextWrapping="Wrap"/>
-                        </GroupBox>
-                    </DockPanel>
+                        <GroupBox Header="Выбранное письмо" Grid.Column="1">
+                        <DockPanel>
+                            <GroupBox Header="Заголовок письма" DockPanel.Dock="Top">
+                                <TextBox Text="Текст заголовка письма" Name="MailHeader"/>
+                            </GroupBox>
+                            <GroupBox Header="Тест письма">
+                                    <TextBox TextWrapping="Wrap" AcceptsReturn="True" Name="MailBody">Текст тела письма</TextBox>
+                            </GroupBox>
+                        </DockPanel>
+                    </GroupBox>
+                    </Grid>
                 </TabItem>
                 <TabItem ToolTip="Сводная информация по отправленным письмам" Background="White" BorderBrush="AliceBlue" Visibility="Collapsed">
                     <TabItem.Header>
