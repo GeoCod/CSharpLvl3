@@ -6,10 +6,13 @@ namespace CSharpLvl3
     /// <summary>Логика взаимодействия для SenderEditor.xaml</summary>
     public partial class SenderEditor
     {
+        public string NameValue { get => NameEditor.Text; set => NameEditor.Text = value; }
+        public string AdressValue { get => NameEditor.Text; set => AdressEditor.Text = value; }
         public SenderEditor(Sender Sender)
         {
             InitializeComponent();
-            DataContext = Sender;
+            NameValue = Sender.Name;
+            AdressValue = Sender.Adress;
         }
 
         private void OnOkButtonClick(object sender, RoutedEventArgs e)

@@ -49,7 +49,8 @@ namespace CSharpLvl3
             var dialog = new SenderEditor(sender);
 
             if (dialog.ShowDialog() != true) return;
-            //внести изменения в sender
+            sender.Name = dialog.NameValue;
+            sender.Adress = dialog.AdressValue;
         }
     }
 }
