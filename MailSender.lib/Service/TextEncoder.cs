@@ -4,13 +4,13 @@ namespace MailSender.lib.Service
 {
     public static class TextEncoder
     {
-        public static string Encode(string Source, int Key = 1)
+        public static string Encode(this string Source, int Key = 1)
         {
             return new string(Source.Select(c => (char)(c + Key)).ToArray());
         }
 
 
-        public static string Decode(string Source, int Key = 1)
+        public static string Decode(this string Source, int Key = 1)
         {
             return new string(Source.Select(c => (char)(c - Key)).ToArray());
         }
