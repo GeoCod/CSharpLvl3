@@ -7,6 +7,8 @@
         xmlns:vm="clr-namespace:CSharpLvl3.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
+        xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
         mc:Ignorable="d"
         Height="620" Width="1080" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
@@ -39,7 +41,8 @@
                         <ToolBarTray>
                             <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
                                 <ComboBox Width="200" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя" Margin="5 3 10 3"
-                                          Style="{DynamicResource MaterialDesignComboBox}"/>
+                                          Style="{DynamicResource MaterialDesignComboBox}" 
+                                          ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Adress"/>
                                 <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Solid_UserPlus" Height="18" Foreground="Green"/>
@@ -54,7 +57,22 @@
                                 </Button>
                             </ToolBar>
                             <ToolBar x:Name="tbSmtp" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
-                                <ComboBox Width="200" Name="cbSmtpSelect" Style="{DynamicResource MaterialDesignComboBox}" Margin="5 3 10 3"/>
+                                <ComboBox Width="200" Name="cbSmtpSelect" Style="{DynamicResource MaterialDesignComboBox}" Margin="5 3 10 3"
+                                          ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="entities:Server">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Adress}" Opacity="0.6">
+                                                    <TextBlock.ToolTip>
+                                                        <TextBlock Text="{Binding Port, StringFormat=Порт: {0}}"/>
+                                                    </TextBlock.ToolTip>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                                 <Button x:Name="btnAddSmtp" ToolTip="Добавить почтовый сервер" Margin="0 0 3 0" 
                                          Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Regular_CalendarPlus" Height="18" Foreground="Green"/>
