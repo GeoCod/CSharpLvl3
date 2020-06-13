@@ -40,5 +40,16 @@ namespace CSharpLvl3
 
             mail_sender.Send(MailHeader.Text, MailBody.Text, sender.Adress, recipient.Adress);
         }
+
+        private void OnSenderEditClick(object Sender, RoutedEventArgs e)
+        {
+            var sender = SendersList.SelectedItem as Sender;
+            if (sender is null) return;
+
+            var dialog = new SenderEditor(sender);
+
+            if (dialog.ShowDialog() != true) return;
+            //внести изменения в sender
+        }
     }
 }

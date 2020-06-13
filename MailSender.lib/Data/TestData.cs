@@ -29,9 +29,9 @@ namespace MailSender.lib.Data
         /// <summary>Список получателей</summary>
         public static List<Recipient> Recipients { get; } = new List<Recipient>
         {
-            new Recipient { Name = "Иванов", Adress = "ivanov@server.ru" },
-            new Recipient { Name = "Петров", Adress = "petrov@server.ru" },
-            new Recipient { Name = "Сидоров", Adress = "sidorov@server.ru" },
+            new Recipient { Name = "Попов", Adress = "popov@server.ru" },
+            new Recipient { Name = "Федотов", Adress = "fedotov@server.ru" },
+            new Recipient { Name = "Капустин", Adress = "kapustin@server.ru" },
         };
     }
 }

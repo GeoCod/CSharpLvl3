@@ -41,13 +41,26 @@
                         <ToolBarTray>
                             <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
                                 <ComboBox Width="200" Name="SendersList" ToolTip="Выбрать email отправителя" Margin="5 3 10 3"
-                                          Style="{DynamicResource MaterialDesignComboBox}" IsEditable="True"
-                                          ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Adress"/>
+                                          Style="{DynamicResource MaterialDesignComboBox}" IsEditable="True" SelectedIndex="0"
+                                          ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Name"/>
+                                <!--<ComboBox Width="200" Name="SendersList" ToolTip="Выбрать отправителя" Margin="5 3 10 3"
+                                          Style="{DynamicResource MaterialDesignComboBox}"
+                                          ItemsSource="{x:Static data:TestData.Senders}" SelectedIndex="0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="entities:Sender">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Adress}" Opacity="0.6"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>-->
                                 <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Solid_UserPlus" Height="18" Foreground="Green"/>
                                 </Button>
-                                <Button x:Name="btnEditSender" ToolTip="Редактировать" Margin="0 0 3 0" 
+                                <Button x:Name="btnEditSender" ToolTip="Редактировать" Margin="0 0 3 0"  Click="OnSenderEditClick"
                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Solid_UserEdit" Height="18" Foreground="Black"/>
                                 </Button>
@@ -56,7 +69,7 @@
                                     <fa:SvgAwesome Icon="Solid_UserMinus" Height="18" Foreground="Red"/>
                                 </Button>
                             </ToolBar>
-                            <ToolBar x:Name="tbSmtp" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
+                            <ToolBar x:Name="tbServer" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
                                 <ComboBox Width="200" Name="ServersList" Style="{DynamicResource MaterialDesignComboBox}" Margin="5 3 10 3"
                                           ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
                                     <ComboBox.ItemTemplate>
@@ -112,9 +125,9 @@
                             </ToolBar>
                         </ToolBarTray>
                         <GroupBox Grid.Row="1" Header="Получатели писем">
-                            <DataGrid Style="{DynamicResource MaterialDesignDataGrid}" ItemsSource="{x:Static data:TestData.Recipients}"
+                            <DataGrid  Name="RecipientsList" ItemsSource="{x:Static data:TestData.Recipients}"
                                       AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="Gray" GridLinesVisibility="Vertical"
-                                      AlternatingRowBackground="Violet" Name="RecipientsList">
+                                      AlternatingRowBackground="Violet" Foreground="DarkMagenta">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
                                     <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="Auto" MinWidth="250"/>

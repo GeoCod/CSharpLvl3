@@ -11,5 +11,17 @@ namespace CSharpLvl3
             InitializeComponent();
             DataContext = Sender;
         }
+
+        private void OnOkButtonClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
+        }
+
+        private void OnCancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
     }
 }
