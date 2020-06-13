@@ -41,7 +41,7 @@
                         <ToolBarTray>
                             <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
                                 <ComboBox Width="200" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя" Margin="5 3 10 3"
-                                          Style="{DynamicResource MaterialDesignComboBox}" 
+                                          Style="{DynamicResource MaterialDesignComboBox}" IsEditable="True"
                                           ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Adress"/>
                                 <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">

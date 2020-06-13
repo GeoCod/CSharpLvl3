@@ -1,5 +1,5 @@
 ﻿using MailSender.lib.Entities;
-using MailSender.lib.Entityes;
+using MailSender.lib.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,10 +12,10 @@ namespace MailSender.lib.Data
         /// <summary>Список серверов</summary>
         public static List<Server> Servers { get; } = new List<Server>
         {
-            new Server {Name = "Яндекс", Adress = "smtp.yandex.ru", Port = 587, Login = "UserLogin", Password = "UserPass"},
-            new Server {Name = "Mail.ru", Adress = "smtp.mail.ru", Port = 465, Login = "UserLogin", Password = "UserPass"},
-            new Server {Name = "Google", Adress = "smtp.gmail.com", Port = 465, Login = "UserLogin", Password = "UserPass"},
-            new Server {Name = "Рамблер", Adress = "smtp.rambler.ru ", Port = 465, Login = "UserLogin", Password = "UserPass"},
+            new Server {Name = "Яндекс", Adress = "smtp.yandex.ru", Port = 587, Login = "UserLogin", Password = TextEncoder.Encode("UserPass")},
+            new Server {Name = "Mail.ru", Adress = "smtp.mail.ru", Port = 465, Login = "UserLogin", Password = TextEncoder.Encode("UserPass")},
+            new Server {Name = "Google", Adress = "smtp.gmail.com", Port = 465, Login = "UserLogin", Password = TextEncoder.Encode("UserPass")},
+            new Server {Name = "Рамблер", Adress = "smtp.rambler.ru ", Port = 465, Login = "UserLogin", Password = TextEncoder.Encode("UserPass")},
         };
 
         /// <summary>Список отправителей</summary>

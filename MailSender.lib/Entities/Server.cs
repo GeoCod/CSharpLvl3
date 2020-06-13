@@ -1,4 +1,4 @@
-﻿namespace MailSender.lib.Entityes
+﻿namespace MailSender.lib.Entities
 {
     /// <summary>Почтовый сервер</summary>
     public class Server
