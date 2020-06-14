@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpLvl3"
         xmlns:vm="clr-namespace:CSharpLvl3.ViewModels"
-        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
+        xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
         mc:Ignorable="d"
         Height="620" Width="1080" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
@@ -24,15 +25,12 @@
             </Button>
         </Grid>
         <Grid Margin="0 30 0 0">
-            <dragablz:TabablzControl>
-                <dragablz:TabablzControl.InterTabController>
-                    <dragablz:InterTabController/>
-                </dragablz:TabablzControl.InterTabController>
-                <TabItem ToolTip="Управление рассылкой писем">
+            <TabControl>
+                <TabItem ToolTip="Управление рассылкой писем" Background="White" BorderBrush="AliceBlue">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Solid_MailBulk" Height="15" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Рассылка" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Solid_MailBulk" Height="15" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Рассылка" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
@@ -42,12 +40,27 @@
                         </Grid.RowDefinitions>
                         <ToolBarTray>
                             <ToolBar x:Name="tbSender" Header="Выбрать отправителя" FontWeight="Bold">
-                                <ComboBox Width="150" x:Name="cbSenderSelect" ToolTip="Выбрать email отправителя"/>
+                                <ComboBox Width="200" Name="SendersList" ToolTip="Выбрать email отправителя" Margin="5 3 10 3"
+                                          Style="{DynamicResource MaterialDesignComboBox}" IsEditable="True" SelectedIndex="0"
+                                          ItemsSource="{x:Static data:TestData.Senders}" DisplayMemberPath="Name"/>
+                                <!--<ComboBox Width="200" Name="SendersList" ToolTip="Выбрать отправителя" Margin="5 3 10 3"
+                                          Style="{DynamicResource MaterialDesignComboBox}"
+                                          ItemsSource="{x:Static data:TestData.Senders}" SelectedIndex="0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="entities:Sender">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Adress}" Opacity="0.6"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>-->
                                 <Button x:Name="btnAddSender" ToolTip="Добавить" Margin="0 0 3 0" 
                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Solid_UserPlus" Height="18" Foreground="Green"/>
                                 </Button>
-                                <Button x:Name="btnEditSender" ToolTip="Редактировать" Margin="0 0 3 0" 
+                                <Button x:Name="btnEditSender" ToolTip="Редактировать" Margin="0 0 3 0"  Click="OnSenderEditClick"
                                         Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Solid_UserEdit" Height="18" Foreground="Black"/>
                                 </Button>
@@ -56,8 +69,23 @@
                                     <fa:SvgAwesome Icon="Solid_UserMinus" Height="18" Foreground="Red"/>
                                 </Button>
                             </ToolBar>
-                            <ToolBar x:Name="tbSmtp" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
-                                <ComboBox Width="150" Name="cbSmtpSelect"/>
+                            <ToolBar x:Name="tbServer" Header="Выбрать smtp-сервер" Band="1" FontWeight="Bold">
+                                <ComboBox Width="200" Name="ServersList" Style="{DynamicResource MaterialDesignComboBox}" Margin="5 3 10 3"
+                                          ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="entities:Server">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                                <TextBlock Text=" : "/>
+                                                <TextBlock Text="{Binding Adress}" Opacity="0.6">
+                                                    <TextBlock.ToolTip>
+                                                        <TextBlock Text="{Binding Port, StringFormat=Порт: {0}}"/>
+                                                    </TextBlock.ToolTip>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                                 <Button x:Name="btnAddSmtp" ToolTip="Добавить почтовый сервер" Margin="0 0 3 0" 
                                          Width="55" Style="{DynamicResource MaterialDesignOutlinedButton}">
                                     <fa:SvgAwesome Icon="Regular_CalendarPlus" Height="18" Foreground="Green"/>
@@ -97,21 +125,23 @@
                             </ToolBar>
                         </ToolBarTray>
                         <GroupBox Grid.Row="1" Header="Получатели писем">
-                            <DataGrid>
+                            <DataGrid  Name="RecipientsList" ItemsSource="{x:Static data:TestData.Recipients}"
+                                      AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="Gray" GridLinesVisibility="Vertical"
+                                      AlternatingRowBackground="Violet" Foreground="DarkMagenta">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
-                                    <DataGridTextColumn Header="Имя" Width="Auto" MinWidth="250"/>
-                                    <DataGridTextColumn Header="Адрес" Width="*"/>
+                                    <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="Auto" MinWidth="250"/>
+                                    <DataGridTextColumn Header="Адрес" Binding="{Binding Adress}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </GroupBox>
                     </Grid>
                 </TabItem>
-                <TabItem ToolTip="Планирование рассылки писем">
+                <TabItem ToolTip="Планирование рассылки писем" Background="White" BorderBrush="AliceBlue">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Regular_CalendarAlt" Height="15" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Планировщик" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Regular_CalendarAlt" Height="15" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Планировщик" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
                     <DockPanel>
@@ -127,7 +157,7 @@
                                             <TextBlock Text="Запланировать" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </DockPanel>
                                     </Button>
-                                    <Button x:Name="btnSend" HorizontalContentAlignment="Stretch">
+                                    <Button x:Name="btnSend" HorizontalContentAlignment="Stretch" Click="OnSendButtonClick">
                                         <DockPanel Margin="40 0">
                                             <fa:SvgAwesome DockPanel.Dock="Right" Icon="Regular_PaperPlane" Foreground="DarkKhaki"/>
                                             <TextBlock Text="Отправить" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -182,25 +212,56 @@
                         </GroupBox>
                     </DockPanel>
                 </TabItem>
-                <TabItem ToolTip="Редактировние писем">
+                <TabItem ToolTip="Редактировние писем" Background="White" BorderBrush="AliceBlue">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Regular_Edit" Height="15" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Редактор писем" Foreground="White"/>
+                            <fa:SvgAwesome Icon="Regular_Edit" Height="15" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Редактор писем" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="150" MaxWidth="300" Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Header="Список писем">
+                            <DockPanel>
+                                <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+                                    <Button Content="Добавить"/>
+                                    <Button Content="Удалить"/>
+                                </UniformGrid>
+                                <ListBox>
+                                    <ListBoxItem>Письмо 1</ListBoxItem>
+                                    <ListBoxItem>Письмо 2</ListBoxItem>
+                                    <ListBoxItem>Письмо 3</ListBoxItem>
+                                    <ListBoxItem>Письмо 4</ListBoxItem>
+                                </ListBox>
+                            </DockPanel>
+
+                        </GroupBox>
+                        <GroupBox Header="Выбранное письмо" Grid.Column="1">
+                        <DockPanel>
+                            <GroupBox Header="Заголовок письма" DockPanel.Dock="Top">
+                                <TextBox Text="Текст заголовка письма" Name="MailHeader"/>
+                            </GroupBox>
+                            <GroupBox Header="Тест письма">
+                                    <TextBox TextWrapping="Wrap" AcceptsReturn="True" Name="MailBody">Текст тела письма</TextBox>
+                            </GroupBox>
+                        </DockPanel>
+                    </GroupBox>
+                    </Grid>
+                </TabItem>
+                <TabItem ToolTip="Сводная информация по отправленным письмам" Background="White" BorderBrush="AliceBlue" Visibility="Collapsed">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="18" Margin="0 0 5 0" Foreground="#FF9C27B0"/>
+                            <TextBlock Text="Статистика" Foreground="#FF9C27B0" FontSize="14" FontWeight="Bold"/>
                         </StackPanel>
                     </TabItem.Header>
 
                 </TabItem>
-                <TabItem ToolTip="Сводная информация по отправленным письмам">
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <fa:SvgAwesome Icon="Regular_ChartBar" Height="18" Margin="0 0 5 0" Foreground="White"/>
-                            <TextBlock Text="Статистика" Foreground="White"/>
-                        </StackPanel>
-                    </TabItem.Header>
-
-                </TabItem>
-            </dragablz:TabablzControl>
+            </TabControl>
         </Grid>
     </Grid>
 </Window>

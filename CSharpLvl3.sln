@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLvl3", "CSharpLvl3\CSharpLvl3.csproj", "{B9F5056C-A78E-414A-B7E7-4ABBFCF8693B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLvl3", "CSharpLvl3\CSharpLvl3.csproj", "{B9F5056C-A78E-414A-B7E7-4ABBFCF8693B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E7145AF2-D220-4CCB-973B-4AA089D2C69A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testConsole", "testConsole\testConsole.csproj", "{41A60700-95BD-4AC5-A08E-798CF606904D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testConsole", "testConsole\testConsole.csproj", "{41A60700-95BD-4AC5-A08E-798CF606904D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testWPF", "testWPF\testWPF.csproj", "{2D2D1AF1-ACDB-4233-9940-D31B28EF0D9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testWPF", "testWPF\testWPF.csproj", "{2D2D1AF1-ACDB-4233-9940-D31B28EF0D9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailSender.lib", "MailSender.lib\MailSender.lib.csproj", "{04315795-D8AC-4BF0-8DB6-206C52FF98C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{2D2D1AF1-ACDB-4233-9940-D31B28EF0D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D2D1AF1-ACDB-4233-9940-D31B28EF0D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D2D1AF1-ACDB-4233-9940-D31B28EF0D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04315795-D8AC-4BF0-8DB6-206C52FF98C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04315795-D8AC-4BF0-8DB6-206C52FF98C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04315795-D8AC-4BF0-8DB6-206C52FF98C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04315795-D8AC-4BF0-8DB6-206C52FF98C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
