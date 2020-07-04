@@ -8,6 +8,7 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
         xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
+        xmlns:view="clr-namespace:CSharpLvl3.Views"
         mc:Ignorable="d"
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
         Height="620" Width="1080" ResizeMode="NoResize"
@@ -122,15 +123,7 @@
                             </ToolBar>
                         </ToolBarTray>
                         <GroupBox Grid.Row="1" Header="Получатели писем">
-                            <DataGrid  Name="RecipientsList" ItemsSource="{Binding Recipients}"
-                                      AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="Gray" GridLinesVisibility="Vertical"
-                                      AlternatingRowBackground="Violet" Foreground="DarkMagenta">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
-                                    <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="Auto" MinWidth="250"/>
-                                    <DataGridTextColumn Header="Адрес" Binding="{Binding Adress}" Width="*"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                            <view:RecipientsView/>
                         </GroupBox>
                     </Grid>
                 </TabItem>
