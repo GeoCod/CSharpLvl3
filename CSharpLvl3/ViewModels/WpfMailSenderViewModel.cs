@@ -1,8 +1,12 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
 using CSharpLvl3.Infrastructure.Commands;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using MailSender.lib.Entities;
+using MailSender.lib.Services;
 
 namespace CSharpLvl3.ViewModels
 {
@@ -10,6 +14,8 @@ namespace CSharpLvl3.ViewModels
     {
         #region Поля
         private string _Title = "Расылщик";
+
+        private readonly RecipientsManager _RecipientsManager;
         #endregion
 
 
@@ -22,6 +28,15 @@ namespace CSharpLvl3.ViewModels
         }
 
         #endregion
+
+
+        // При обновлении коллекции оповещаем интерфейс
+        private ObservableCollection<Recipient> _Recipients;
+        public ObservableCollection<Recipient> Recipients
+        {
+            get => _Recipients;
+            private set => Set(ref _Recipients, value);
+        }
 
 
         #region Команды
@@ -41,14 +56,19 @@ namespace CSharpLvl3.ViewModels
         #endregion
 
         #endregion
-
-        public WpfMailSenderViewModel()
+        
+        public WpfMailSenderViewModel(RecipientsManager RecipientsManager)
         {
+
             #region Команды
 
             CloseApplicationCommnd = new LambdaCommand(OnCloseApplicationCommndExecuted, CanCloseApplicationCommndExecute);
 
             #endregion
+
+            _RecipientsManager = RecipientsManager;
+
+            _Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
         }
     }
 }

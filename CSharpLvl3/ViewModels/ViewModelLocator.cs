@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using MailSender.lib.Services;
 
 namespace CSharpLvl3.ViewModels
 {
@@ -23,7 +21,13 @@ namespace CSharpLvl3.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<WpfMailSenderViewModel>();
+            // Регистрируем сервисы
+            var services = SimpleIoc.Default;
+
+            services.Register<WpfMailSenderViewModel>();
+
+            services.Register<RecipientsManager>();
+            services.Register<RecipientStoreInMemory>();
         }
 
         public WpfMailSenderViewModel MainWindowViewModel => ServiceLocator.Current.GetInstance<WpfMailSenderViewModel>();
