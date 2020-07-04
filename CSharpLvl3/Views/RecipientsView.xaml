@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSharpLvl3.Views"
+             DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel Margin="3">
@@ -13,12 +14,12 @@
             <TextBox></TextBox>
         </DockPanel>
         <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="40 5" Margin="0 5 0 10">Обновить</Button>
-        <DataGrid  Name="RecipientsList" ItemsSource="{Binding MainWindowViewModel.Recipients, Source={StaticResource Locator}}"
-                                      AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="#FFFFCCCC" GridLinesVisibility="Vertical"
-                                      AlternatingRowBackground="#FFFFCEFF" Foreground="DarkMagenta">
+        <DataGrid  ItemsSource="{Binding Recipients}" SelectedItem="{Binding SelectedRecipient}"
+                    AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="#FFFFCCCC" GridLinesVisibility="Vertical"
+                    AlternatingRowBackground="#FFFFCEFF" Foreground="DarkMagenta">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="Auto" MinWidth="250"/>
+                <DataGridTextColumn Header="id" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*" MinWidth="250"/>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Adress}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

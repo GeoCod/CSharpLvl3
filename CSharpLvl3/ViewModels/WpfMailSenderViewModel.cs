@@ -30,15 +30,6 @@ namespace CSharpLvl3.ViewModels
         #endregion
 
 
-        // При обновлении коллекции оповещаем интерфейс
-        private ObservableCollection<Recipient> _Recipients;
-        public ObservableCollection<Recipient> Recipients
-        {
-            get => _Recipients;
-            private set => Set(ref _Recipients, value);
-        }
-
-
         #region Команды
 
         #region CloseApplicationCommand
@@ -55,7 +46,25 @@ namespace CSharpLvl3.ViewModels
         }
         #endregion
 
+
         #endregion
+
+        // При обновлении коллекции оповещаем интерфейс
+        private ObservableCollection<Recipient> _Recipients;
+        public ObservableCollection<Recipient> Recipients
+        {
+            get => _Recipients;
+            private set => Set(ref _Recipients, value);
+        }
+
+        private Recipient _SelectRecipient;
+
+        public Recipient SelectedRecipient
+        {
+            get => _SelectRecipient;
+            set => Set(ref _SelectRecipient, value);
+        }
+
         
         public WpfMailSenderViewModel(RecipientsManager RecipientsManager)
         {
