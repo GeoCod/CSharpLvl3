@@ -3,6 +3,9 @@
     /// <summary>Почтовый сервер</summary>
     public class Server
     {
+        /// <summary>ID сервера</summary>
+        public int Id { get; set; }
+
         /// <summary>Название сервера</summary>
         public string Name { get; set; }
 
