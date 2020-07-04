@@ -23,7 +23,9 @@ namespace CSharpLvl3.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            //SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<WpfMailSenderViewModel>();
         }
+
+        public WpfMailSenderViewModel MainWindowViewModel => ServiceLocator.Current.GetInstance<WpfMailSenderViewModel>();
     }
 }
