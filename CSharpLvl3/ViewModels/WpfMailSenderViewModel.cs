@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using CSharpLvl3.Infrastructure.Commands;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Ioc;
 using MailSender.lib.Entities;
 using MailSender.lib.Services;
@@ -46,8 +47,33 @@ namespace CSharpLvl3.ViewModels
         }
         #endregion
 
+        #region LoadRecipientsDataCommand
+        /// <summary>Команда загружающая данные на форму</summary>
+        public ICommand LoadRecipientsDataCommand { get; }
+
+        private bool CanLoadRecipientsDataCommandExecute() => true;
+
+        private void OnLoadRecipientsDataCommandExecuted()
+        {
+            Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
+        }
+        #endregion
+
+        #region SaveRecipientChangesCommand
+        /// <summary>Команда загружающая данные на форму</summary>
+        public ICommand SaveRecipientChangesCommand { get; }
+
+        private bool CanSaveRecipientChangesCommandExecute(Recipient recipient) => recipient != null;
+
+        private void OnSaveRecipientChangesCommandExecuted(Recipient recipient)
+        {
+            _RecipientsManager.Edit(recipient);
+            _RecipientsManager.SaveChanges();
+        }
+        #endregion
 
         #endregion
+
 
         // При обновлении коллекции оповещаем интерфейс
         private ObservableCollection<Recipient> _Recipients;
@@ -68,16 +94,17 @@ namespace CSharpLvl3.ViewModels
         
         public WpfMailSenderViewModel(RecipientsManager RecipientsManager)
         {
+            _RecipientsManager = RecipientsManager;
 
             #region Команды
 
             CloseApplicationCommnd = new LambdaCommand(OnCloseApplicationCommndExecuted, CanCloseApplicationCommndExecute);
 
+            LoadRecipientsDataCommand = new RelayCommand(OnLoadRecipientsDataCommandExecuted, CanLoadRecipientsDataCommandExecute);
+
+            SaveRecipientChangesCommand = new RelayCommand<Recipient>(OnSaveRecipientChangesCommandExecuted, CanSaveRecipientChangesCommandExecute);
+
             #endregion
-
-            _RecipientsManager = RecipientsManager;
-
-            _Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
         }
     }
 }
