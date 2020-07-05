@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Ioc;
 using MailSender.lib.Entities;
 using MailSender.lib.Services;
+using MailSender.lib.Services.Interfaces;
 
 namespace CSharpLvl3.ViewModels
 {
@@ -16,7 +17,7 @@ namespace CSharpLvl3.ViewModels
         #region Поля
         private string _Title = "Расылщик";
 
-        private readonly RecipientsManager _RecipientsManager;
+        private readonly IRecipientsManager _RecipientsManager;
         #endregion
 
 
@@ -92,7 +93,7 @@ namespace CSharpLvl3.ViewModels
         }
 
         
-        public WpfMailSenderViewModel(RecipientsManager RecipientsManager)
+        public WpfMailSenderViewModel(IRecipientsManager RecipientsManager)
         {
             _RecipientsManager = RecipientsManager;
 

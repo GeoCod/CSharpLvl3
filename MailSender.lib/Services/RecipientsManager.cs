@@ -11,9 +11,9 @@ namespace MailSender.lib.Services
     {
         // В последнующем надо создать хранлилища для фалов, БД и т.п. и передавать их классы в менеджер
 
-        private RecipientStoreInMemory _Store;
+        private IRecipientStore _Store;
 
-        public RecipientsManager(RecipientStoreInMemory Store) { _Store = Store; }
+        public RecipientsManager(IRecipientStore Store) { _Store = Store; }
 
         /// <summary>Вывод всех получателей</summary>
         public IEnumerable<Recipient> GetAll()
