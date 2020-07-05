@@ -30,15 +30,15 @@ namespace CSharpLvl3
 
         private void OnSendButtonClick(object Sender, RoutedEventArgs e)
         {
-            var recipient = RecipientsList.SelectedItem as Recipient;
-            var sender = SendersList.SelectedItem as Sender;
-            var server = ServersList.SelectedItem as Server;
+            //var recipient = RecipientsList.SelectedItem as Recipient;
+            //var sender = SendersList.SelectedItem as Sender;
+            //var server = ServersList.SelectedItem as Server;
 
-            if (recipient is null || sender is null || server is null) return;
+            //if (recipient is null || sender is null || server is null) return;
 
-            var mail_sender = new MailSender.lib.Services.MailSender(server.Adress, server.Port, server.UseSSL, server.Login, server.Password.Decode(3));
+            //var mail_sender = new MailSender.lib.Services.MailSender(server.Adress, server.Port, server.UseSSL, server.Login, server.Password.Decode(3));
 
-            mail_sender.Send(MailHeader.Text, MailBody.Text, sender.Adress, recipient.Adress);
+            //mail_sender.Send(MailHeader.Text, MailBody.Text, sender.Adress, recipient.Adress);
         }
 
         private void OnSenderEditClick(object Sender, RoutedEventArgs e)

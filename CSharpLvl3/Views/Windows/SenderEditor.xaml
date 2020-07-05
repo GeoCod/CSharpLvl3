@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpLvl3"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="SenderEditor" Height="160" Width="280">
     <Grid Margin="5">
@@ -17,9 +18,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Имя" Grid.Column="0" Grid.Row="0"/>
-        <TextBlock Text="Адрес" Grid.Column="0" Grid.Row="1"/>
-        <TextBlock Text="Описание" Grid.Column="0" Grid.Row="2"/>
+        <TextBlock Text="Имя" Grid.Column="0" Grid.Row="0" FontWeight="Bold" Foreground="#FF9C27B0"/>
+        <TextBlock Text="Адрес" Grid.Column="0" Grid.Row="1" FontWeight="Bold" Foreground="#FF9C27B0"/>
+        <TextBlock Text="Описание" Grid.Column="0" Grid.Row="2" FontWeight="Bold" Foreground="#FF9C27B0"/>
         
         <TextBox Grid.Column="1" Grid.Row="0" Name="NameEditor"/>
         <TextBox Grid.Column="1" Grid.Row="1" Name="AdressEditor"/>

@@ -4,20 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharpLvl3"
-        xmlns:vm="clr-namespace:CSharpLvl3.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
         xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
+        xmlns:view="clr-namespace:CSharpLvl3.Views"
         mc:Ignorable="d"
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
         Height="620" Width="1080" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowDrop="True">
-    <Window.DataContext>
-        <vm:WpfMailSenderViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid Height="30" VerticalAlignment="Top" Background="#FF9C27B0" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-            <TextBlock Text="Рассылщик почты" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
+            <TextBlock Text="{Binding Title}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" 
                        FontSize="20" FontFamily="Champagne &amp; Limousines" />
             <Button HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" 
                     Command="{Binding CloseApplicationCommnd}">
@@ -125,15 +123,14 @@
                             </ToolBar>
                         </ToolBarTray>
                         <GroupBox Grid.Row="1" Header="Получатели писем">
-                            <DataGrid  Name="RecipientsList" ItemsSource="{x:Static data:TestData.Recipients}"
-                                      AutoGenerateColumns="False" IsReadOnly="True" VerticalGridLinesBrush="Gray" GridLinesVisibility="Vertical"
-                                      AlternatingRowBackground="Violet" Foreground="DarkMagenta">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" Width="Auto" MinWidth="50"/>
-                                    <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="Auto" MinWidth="250"/>
-                                    <DataGridTextColumn Header="Адрес" Binding="{Binding Adress}" Width="*"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <view:RecipientsView Grid.Column="0"/>
+                                <view:RecipientEditor Grid.Column="1"/>
+                            </Grid>
                         </GroupBox>
                     </Grid>
                 </TabItem>
