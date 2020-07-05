@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using MailSender.lib.Entities;
+using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.lib.Services
 {
     /// <summary>Осуществление работы с получателями</summary>
-    public class RecipientsManager
+    public class RecipientsManager : IRecipientsManager
     {
         // В последнующем надо создать хранлилища для фалов, БД и т.п. и передавать их классы в менеджер
 
