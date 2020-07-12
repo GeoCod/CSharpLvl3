@@ -18,7 +18,7 @@ namespace MailSender.lib.Services
         /// <summary>Вывод всех получателей</summary>
         public IEnumerable<Recipient> GetAll()
         {
-            return _Store.Get();
+            return _Store.GetAll();
         }
 
         /// <summary>Добавление получателя</summary>

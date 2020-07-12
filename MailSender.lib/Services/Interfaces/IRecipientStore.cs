@@ -7,9 +7,15 @@ namespace MailSender.lib.Services.Interfaces
 {
     public interface IRecipientStore
     {
-        IEnumerable<Recipient> Get();
+        IEnumerable<Recipient> GetAll();
+
+        Recipient GetById(int id);
+
+        int Create(Recipient Recipient);
 
         void Edit(int id, Recipient Recipient);
+
+        Recipient Remove(int id);
 
         void SaveChanges();
     }
