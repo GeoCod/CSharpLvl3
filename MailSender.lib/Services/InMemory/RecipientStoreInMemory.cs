@@ -1,9 +1,7 @@
 ﻿using MailSender.lib.Data;
 using MailSender.lib.Entities;
 using MailSender.lib.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace MailSender.lib.Services
