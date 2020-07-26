@@ -1,16 +1,10 @@
 ﻿
+using MailSender.lib.Entities.Base;
+
 namespace MailSender.lib.Entities
 {
     /// <summary>Отправитель письма</summary>
-    public class Sender
+    public class Sender : PersonEntity
     {
-        /// <summary>ID отправителя</summary>
-        public int Id { get; set; }
-
-        /// <summary>Имя отправителя</summary>
-        public string Name { get; set; }
-
-        /// <summary>e-mail отправителя</summary>
-        public string Adress { get; set; }
     }
 }
